@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>AI192</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+margin-top:100px;
+}
+
+input{
+width:400px;
+padding:15px;
+font-size:18px;
+}
+
+button{
+padding:15px;
+font-size:18px;
+background:#22c55e;
+color:white;
+border:none;
+}
+
+#answer{
+margin-top:40px;
+font-size:20px;
+width:600px;
+margin-left:auto;
+margin-right:auto;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>AI192 Search AI</h1>
+
+<input id="question" placeholder="اكتب سؤالك">
+
+<button onclick="ask()">اسأل</button>
+
+<div id="answer"></div>
+
+<script>
+
+async function ask(){
+
+let q = document.getElementById("question").value
+
+let res = await fetch("/ask",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+question:q
+})
+
+})
+
+let data = await res.json()
+
+document.getElementById("answer").innerText = data.answer
+
+}
+
+</script>
+
+</body>
+
+</html>
